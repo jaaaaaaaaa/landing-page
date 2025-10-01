@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="initial-scale=2" />
-  <title></title>
-  <link rel="stylesheet" href="styles/main.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact us form - Fill out the form and we will respond as soon as possible" />
+  <title>Contact Us - Landing Page</title>
+  
+  <!-- to do add favicon  -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+  <link href="styles/main.css" rel="stylesheet">
+  <noscript><link rel="stylesheet" href="styles/main.css"></noscript>
 </head>
 <body>
 <header>
@@ -13,22 +19,44 @@
 </header>
 
 <main>
-  <form id="contactForm" method="POST">
-    <label>Name:</label><br />
-    <input type="text" id="name" name="name" /><br />
-    <label>Email</label><br />
-    <input type="email" id="email" name="email" /><br />
-    <label>Message</label><br />
-    <textarea id="message" name="message" rows="1"></textarea><br />
+  <form id="contactForm" method="POST" action="contact.php">
+    <label for="name">Name:</label><br />
+    <input type="text" id="name" name="name" required /><br />
+    <label for="email">Email:</label><br />
+    <input type="email" id="email" name="email" required /><br />
+    <label for="message">Message:</label><br />
+    <textarea id="message" name="message" rows="4" required></textarea><br />
     <button type="submit">Send</button>
   </form>
   <div id="responseMsg"></div>
 </main>
 
-<script>
+<script defer>
   const form = document.getElementById('contactForm');
-  form.addEventListener('submit', e => {
+  const responseMsg = document.getElementById('responseMsg');
+  
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch('contact.php', {
+        method: 'POST',
+        body: formData
+      });
+      
+      const result = await response.json();
+      
+      if (result.status === 'success') {
+        responseMsg.innerHTML = '<p style="color: #4CAF50;">' + result.message + '</p>';
+        form.reset();
+      } else {
+        responseMsg.innerHTML = '<p style="color: #f44336;">' + result.message + '</p>';
+      }
+    } catch (error) {
+      responseMsg.innerHTML = '<p style="color: #f44336;">An error occurred. Please try again.</p>';
+    }
   });
 </script>
 </body>

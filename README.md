@@ -32,3 +32,11 @@ Run in the terminal:
 ---
 
 Good luck!
+
+
+
+<!-- npx sass styles/main.scss styles/main.css -->
+
+1. optymalizacja styli + optional add main.css to gitignore (np kompilacja scss do css w dockerfile)
+2. optymalizacja bg.png
+3. zwieksznie kontrastu UI 
