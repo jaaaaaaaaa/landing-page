@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="initial-scale=2" />
+  <title></title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+<header>
+  <h1>Contact with us</h1>
+  <p>Fill out the form – we will respond as soon as possible.</p>
+</header>
+
+<main>
+  <form id="contactForm" method="POST">
+    <label>Name:</label><br />
+    <input type="text" id="name" name="name" /><br />
+    <label>Email</label><br />
+    <input type="email" id="email" name="email" /><br />
+    <label>Message</label><br />
+    <textarea id="message" name="message" rows="1"></textarea><br />
+    <button type="submit">Send</button>
+  </form>
+  <div id="responseMsg"></div>
+</main>
+
+<script>
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+  });
+</script>
+</body>
+</html>
