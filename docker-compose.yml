@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  php-apache:
+    image: php:8.1-apache
+    container_name: landing-php
+    volumes:
+      - ./:/var/www/html
+    restart: always
